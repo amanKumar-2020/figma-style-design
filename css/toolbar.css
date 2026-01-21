@@ -1,0 +1,20 @@
+.toolbar {
+  height: 56px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid #333;
+}
+
+.toolbar button {
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.toolbar button.active {
+  color: var(--accent);
+}

@@ -1,0 +1,18 @@
+:root {
+  --bg-dark: #1e1e1e;
+  --bg-panel: #252525;
+  --bg-toolbar: #2b2b2b;
+  --accent: #6c6cff;
+  --text: #eaeaea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+}
