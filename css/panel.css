@@ -1,52 +1,68 @@
 .properties-panel {
   position: absolute;
-  top: 80px;
-  right: 20px;
-  width: 260px;
+  top: 72px;
+  right: 16px;
+  width: 260px;                 
   background: #1f1f1f;
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
   color: #ddd;
   z-index: 100;
+  font-size: 12px;
 }
 
 .properties-panel.hidden {
   display: none;
 }
 
+/* section */
 .prop-group {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .prop-group label {
   display: block;
   font-size: 11px;
   color: #aaa;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
+/* row */
 .input-row {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
 }
 
+/* inputs */
 .input-row input {
   flex: 1;
+  height: 28px;                 
   background: #2a2a2a;
   border: none;
   border-radius: 6px;
-  padding: 6px;
+  padding: 4px 6px;
   color: #eee;
   font-size: 12px;
+  min-width: 0;                 
 }
 
+/* icon buttons */
 .icon-btn.small {
+  width: 28px;                  
+  height: 28px;
+  display: grid;
+  place-items: center;
   background: #2a2a2a;
   border: none;
   color: #ddd;
-  padding: 6px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 13px;
+  flex-shrink: 0;               
+}
+
+.icon-btn.small:hover {
+  background: #333;
 }

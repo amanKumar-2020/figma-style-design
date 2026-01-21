@@ -1,7 +1,8 @@
 import { renderToolbar } from "./toolbar.js";
 import { showPropertiesPanel } from "./panel.js";
-
-
+import { selectObject, clearSelection } from "./selection.js";
+ import { enableDrag } from "./drag.js";
+ 
 function load(id, file) {
   fetch(file)
     .then((res) => {
@@ -39,4 +40,34 @@ fetch("components/toolbar.html")
   /* TEMP: simulate object selection */
   document.getElementById("workspace").addEventListener("click", () => {
     showPropertiesPanel();
+  });
+
+
+  
+  // TEMP UI DEMO)
+  const demo = document.getElementById("demo-object");
+  const workspace = document.getElementById("workspace");
+
+  demo.addEventListener("click", (e) => {
+    e.stopPropagation();
+    selectObject(demo);
+  });
+
+  workspace.addEventListener("click", () => {
+    clearSelection();
+  });
+
+  // // drag Object
+  /* selection */
+  demo.addEventListener("click", (e) => {
+    e.stopPropagation();
+    selectObject(demo);
+  });
+
+  /* drag */
+  enableDrag(demo);
+
+  /* deselect */
+  workspace.addEventListener("click", () => {
+    clearSelection();
   });
