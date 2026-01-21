@@ -1,4 +1,6 @@
 import { renderToolbar } from "./toolbar.js";
+import { showPropertiesPanel } from "./panel.js";
+
 
 function load(id, file) {
   fetch(file)
@@ -20,6 +22,11 @@ function load(id, file) {
     });
 }
 
+// load("toolbar", "components/toolbar.html");
+load("sidebar-left", "components/sidebar-left.html");
+load("sidebar-right", "components/sidebar-right.html");
+
+
 fetch("components/toolbar.html")
   .then((res) => res.text())
   .then((html) => {
@@ -27,6 +34,9 @@ fetch("components/toolbar.html")
     renderToolbar();
   });
 
-// load("toolbar", "components/toolbar.html");
-load("sidebar-left", "components/sidebar-left.html");
-load("sidebar-right", "components/sidebar-right.html");
+
+
+  /* TEMP: simulate object selection */
+  document.getElementById("workspace").addEventListener("click", () => {
+    showPropertiesPanel();
+  });

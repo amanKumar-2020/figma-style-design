@@ -1,0 +1,52 @@
+.properties-panel {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  width: 260px;
+  background: #1f1f1f;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  color: #ddd;
+  z-index: 100;
+}
+
+.properties-panel.hidden {
+  display: none;
+}
+
+.prop-group {
+  margin-bottom: 12px;
+}
+
+.prop-group label {
+  display: block;
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.input-row input {
+  flex: 1;
+  background: #2a2a2a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  color: #eee;
+  font-size: 12px;
+}
+
+.icon-btn.small {
+  background: #2a2a2a;
+  border: none;
+  color: #ddd;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
