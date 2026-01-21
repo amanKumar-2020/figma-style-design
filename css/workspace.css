@@ -62,3 +62,14 @@
 .canvas-object.dragging {
   cursor: grabbing;
 }
+
+/* resize */
+.handle {
+  pointer-events: all; /* enable resize */
+}
+
+/* cursors */
+.tl, .br { cursor: nwse-resize; }
+.tr, .bl { cursor: nesw-resize; }
+.tm, .bm { cursor: ns-resize; }
+.ml, .mr { cursor: ew-resize; }

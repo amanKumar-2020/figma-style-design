@@ -1,8 +1,10 @@
 import { renderToolbar } from "./toolbar.js";
 import { showPropertiesPanel } from "./panel.js";
 import { selectObject, clearSelection } from "./selection.js";
- import { enableDrag } from "./drag.js";
- 
+import { enableDrag } from "./drag.js";
+import { enableResize } from "./resize.js";
+
+
 function load(id, file) {
   fetch(file)
     .then((res) => {
@@ -66,6 +68,24 @@ fetch("components/toolbar.html")
 
   /* drag */
   enableDrag(demo);
+
+  /* deselect */
+  workspace.addEventListener("click", () => {
+    clearSelection();
+  });
+
+
+  // Resize Object
+
+  /* selection */
+  demo.addEventListener("click", (e) => {
+    e.stopPropagation();
+    selectObject(demo);
+  });
+
+  /* drag + resize */
+  enableDrag(demo);
+  enableResize(demo);
 
   /* deselect */
   workspace.addEventListener("click", () => {
