@@ -3,6 +3,7 @@ import { showPropertiesPanel } from "./panel.js";
 import { selectObject, clearSelection } from "./selection.js";
 import { enableDrag } from "./drag.js";
 import { enableResize } from "./resize.js";
+import { enableRotate } from "./rotate.js";
 
 
 function load(id, file) {
@@ -86,6 +87,24 @@ fetch("components/toolbar.html")
   /* drag + resize */
   enableDrag(demo);
   enableResize(demo);
+
+  /* deselect */
+  workspace.addEventListener("click", () => {
+    clearSelection();
+  });
+
+// Rotation
+
+  /* selection */
+  demo.addEventListener("click", (e) => {
+    e.stopPropagation();
+    selectObject(demo);
+  });
+
+  /* interactions */
+  enableDrag(demo);
+  enableResize(demo);
+  enableRotate(demo);
 
   /* deselect */
   workspace.addEventListener("click", () => {

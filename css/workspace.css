@@ -73,3 +73,29 @@
 .tr, .bl { cursor: nesw-resize; }
 .tm, .bm { cursor: ns-resize; }
 .ml, .mr { cursor: ew-resize; }
+
+/* Rotation Handle Styles */
+.rotate-handle {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border: 2px solid #4b5cff;
+  border-radius: 50%;
+  cursor: grab;
+  pointer-events: all;
+}
+
+.rotate-handle::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 2px;
+  height: 12px;
+  background: #4b5cff;
+  transform: translateX(-50%);
+}
