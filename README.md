@@ -1,6 +1,6 @@
 # Frontend Project (Vanilla JS)
 
-### Sheriyans inter batch Showdown ###
+### Sheryians inter batch Showdown ###
 
 The objective of this project is to build a basic visual design editor
 similar in spirit to Figma, but implemented entirely using standard
@@ -28,4 +28,4 @@ No frameworks, no libraries.
 
 🚧 Project setup phase ✅
 🚧 project skeleton phase ✅
-🚧 project ui phase 
+🚧 project ui phase (left sidebar ✅)
