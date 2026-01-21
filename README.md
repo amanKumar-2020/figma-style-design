@@ -27,4 +27,5 @@ No frameworks, no libraries.
 ## Status
 
 🚧 Project setup phase ✅
-🚧 project skeleton phane 
+🚧 project skeleton phase ✅
+🚧 project ui phase 

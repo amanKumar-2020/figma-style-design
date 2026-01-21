@@ -1,20 +1,32 @@
+
 .toolbar {
   height: 56px;
   display: flex;
-  gap: 8px;
-  padding: 8px;
-  background: var(--bg-toolbar);
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #1f1f1f;
   border-bottom: 1px solid #333;
 }
 
-.toolbar button {
-  background: none;
+.tool-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   border: none;
-  color: var(--text);
+  background: transparent;
+  color: #ddd;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 18px;
+  display: grid;
+  place-items: center;
 }
 
-.toolbar button.active {
-  color: var(--accent);
+.tool-btn:hover {
+  background: #2a2a2a;
+}
+
+.tool-btn.active {
+  background: #3b3bff;
+  color: white;
 }
