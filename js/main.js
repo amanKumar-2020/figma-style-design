@@ -1,11 +1,16 @@
 import { renderToolbar } from "./toolbar.js";
 import { selectObject, clearSelection } from "./selection.js";
 import { enableDrag } from "./drag.js";
-import { enableResize } from "./resize.js";
 import { enableRotate } from "./rotate.js";
 import { initPanel } from "./panel.js";
 import { createObject } from "./objects.js";
 import { renderLayers, moveLayer } from "./layers.js";
+import { initRectangleDraw } from "./rectangleDraw.js";
+import { state } from "./state.js";
+import { enableResize } from "./resize.js";
+
+enableRotate();
+enableResize();
 /* ---------- load helpers ---------- */
 function load(id, file, callback) {
   fetch(file)
@@ -23,13 +28,6 @@ function load(id, file, callback) {
     .catch((err) => console.error(err.message));
 }
 
-
-
-/* ---------- load static UI ---------- */
-load("sidebar-left", "components/sidebar-left.html");
-
-load("sidebar-right", "components/sidebar-right.html", initPanel);
-
 /* ---------- toolbar ---------- */
 fetch("components/toolbar.html")
   .then((res) => res.text())
@@ -39,22 +37,12 @@ fetch("components/toolbar.html")
   });
 
 /* ---------- editor demo object ---------- */
-const demo = document.getElementById("demo-object");
 const workspace = document.getElementById("workspace");
+initRectangleDraw(workspace);
 
-/* selection */
-demo.addEventListener("click", (e) => {
-  e.stopPropagation();
-  selectObject(demo);
-});
-
-/* interactions */
-enableDrag(demo);
-enableResize(demo);
-enableRotate(demo);
-
-/* deselect */
-workspace.addEventListener("click", () => {
+workspace.addEventListener("click", (e) => {
+  if (state.isRotating || state.isResizing) return;
+  if (e.target !== workspace) return; // 🔥 only empty canvas
   clearSelection();
 });
 
@@ -65,11 +53,6 @@ load("sidebar-right", "components/sidebar-right.html", () => {
   load("layers-container", "components/layers.html", renderLayers);
 });
 
-/* demo objects */
-createObject("Rect");
-createObject("Rect");
-
-/* layer buttons */
 document.addEventListener("click", (e) => {
   if (e.target.id === "layer-up") moveLayer("up");
   if (e.target.id === "layer-down") moveLayer("down");

@@ -1,23 +1,30 @@
+import { state } from "./state.js";
 import { selectObject } from "./selection.js";
 
 let isRotating = false;
-let activeEl = null;
 let startAngle = 0;
 let centerX = 0;
 let centerY = 0;
 
-export function enableRotate(objectEl) {
-  const rotateHandle = document.querySelector(".rotate-handle");
+export function enableRotate() {
+  const overlay = document.getElementById("selection-overlay");
+  if (!overlay) return;
+
+  const rotateHandle = overlay.querySelector(".rotate-handle");
+  if (!rotateHandle) return;
 
   rotateHandle.addEventListener("mousedown", (e) => {
     e.stopPropagation();
     e.preventDefault();
+    if (!state.selectedElement) return;
+    state.isRotating = true; 
+    isRotating = true;
+    const el = state.selectedElement;
+    if (!el) return;
 
     isRotating = true;
-    activeEl = objectEl;
 
-    const rect = objectEl.getBoundingClientRect();
-
+    const rect = el.getBoundingClientRect();
     centerX = rect.left + rect.width / 2;
     centerY = rect.top + rect.height / 2;
 
@@ -26,24 +33,23 @@ export function enableRotate(objectEl) {
 }
 
 window.addEventListener("mousemove", (e) => {
-  if (!isRotating || !activeEl) return;
+  if (!isRotating) return;
+
+  const el = state.selectedElement;
+  if (!el) return;
 
   const currentAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
 
   const angleDeg = (currentAngle - startAngle) * (180 / Math.PI);
 
-  activeEl.style.transform = `rotate(${angleDeg}deg)`;
+  el.dataset.rotation = angleDeg;
+  el.style.transform = `rotate(${angleDeg}deg)`;
 
-  // sync selection overlay
-  selectObject(activeEl);
-
-  activeEl.dataset.rotation = Math.round(angleDeg);
-  activeEl.style.transform = `rotate(${angleDeg}deg)`;
-
+  // keep overlay in sync
+  selectObject(el);
 });
 
 window.addEventListener("mouseup", () => {
   isRotating = false;
-  activeEl = null;
+  state.isRotating = false;
 });
-

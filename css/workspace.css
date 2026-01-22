@@ -99,3 +99,10 @@
   background: #4b5cff;
   transform: translateX(-50%);
 }
+
+
+.canvas-object.ghost {
+  opacity: 0.4;
+  border: 2px dashed #4b5cff;
+  pointer-events: none;
+}

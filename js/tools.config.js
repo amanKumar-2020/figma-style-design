@@ -1,7 +1,7 @@
 
 export const tools = [
   { id: "select", icon: "🖱", label: "Select" },
-  { id: "rectangle", icon: "▭", label: "Rectangle" },
+  { id: "rect", icon: "▭", label: "Rectangle" },
   { id: "diamond", icon: "◆", label: "Diamond" },
   { id: "circle", icon: "◯", label: "Circle" },
   { id: "arrow", icon: "➝", label: "Arrow" },

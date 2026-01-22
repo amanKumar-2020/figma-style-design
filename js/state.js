@@ -1,4 +1,9 @@
+
 export const state = {
-  objects: [],
+  activeTool: "select",
   selectedElement: null,
+  isDrawing: false,
+  isResizing: false,
+  isRotating: false,
+  objects: [],
 };

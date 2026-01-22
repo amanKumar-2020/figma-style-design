@@ -1,8 +1,6 @@
 import { state } from "./state.js";
 import { selectObject } from "./selection.js";
 import { enableDrag } from "./drag.js";
-import { enableResize } from "./resize.js";
-import { enableRotate } from "./rotate.js";
 
 let idCounter = 1;
 
@@ -25,9 +23,7 @@ export function createObject(type = "rect") {
     selectObject(el);
   });
 
-  enableDrag(el);
-  enableResize(el);
-  enableRotate(el);
+  enableDrag(el); // ✅ object-based
 
   state.objects.push(el);
   document.getElementById("workspace").appendChild(el);

@@ -3,9 +3,13 @@ import { syncPanel, showPanel, hidePanel } from "./panel.js";
 import { renderLayers } from "./layers.js";
 
 export function selectObject(el) {
+   if (!el || !el.isConnected) return;
+
+   const overlay = document.getElementById("selection-overlay");
+   if (!overlay) return;
   state.selectedElement = el;
 
-  const overlay = document.getElementById("selection-overlay");
+  // const overlay = document.getElementById("selection-overlay");
   const rect = el.getBoundingClientRect();
   const parentRect = el.offsetParent.getBoundingClientRect();
 

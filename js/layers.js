@@ -2,6 +2,7 @@ import { state } from "./state.js";
 import { selectObject } from "./selection.js";
 
 export function renderLayers() {
+   if (!Array.isArray(state.objects)) return;
   const list = document.getElementById("layers-list");
   if (!list) return;
 
