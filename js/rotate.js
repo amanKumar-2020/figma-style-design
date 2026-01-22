@@ -36,9 +36,14 @@ window.addEventListener("mousemove", (e) => {
 
   // sync selection overlay
   selectObject(activeEl);
+
+  activeEl.dataset.rotation = Math.round(angleDeg);
+  activeEl.style.transform = `rotate(${angleDeg}deg)`;
+
 });
 
 window.addEventListener("mouseup", () => {
   isRotating = false;
   activeEl = null;
 });
+

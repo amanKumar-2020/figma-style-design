@@ -1,26 +1,23 @@
 import { selectObject } from "./selection.js";
+import { clamp } from "./bounds.js";
+
+const MIN_SIZE = 30;
 
 let isResizing = false;
 let activeHandle = null;
 let activeEl = null;
 
-let startX = 0;
-let startY = 0;
-let startWidth = 0;
-let startHeight = 0;
-let startLeft = 0;
-let startTop = 0;
+let startX, startY;
+let startW, startH, startL, startT;
 
 export function enableResize(objectEl) {
-  const handles = document.querySelectorAll(".handle");
-
-  handles.forEach((handle) => {
+  document.querySelectorAll(".handle").forEach((handle) => {
     handle.addEventListener("mousedown", (e) => {
       e.stopPropagation();
       e.preventDefault();
 
       isResizing = true;
-      activeHandle = handle.classList[1]; // tl, tr, etc
+      activeHandle = handle.classList[1];
       activeEl = objectEl;
 
       const rect = objectEl.getBoundingClientRect();
@@ -29,10 +26,10 @@ export function enableResize(objectEl) {
       startX = e.clientX;
       startY = e.clientY;
 
-      startWidth = rect.width;
-      startHeight = rect.height;
-      startLeft = rect.left - parentRect.left;
-      startTop = rect.top - parentRect.top;
+      startW = rect.width;
+      startH = rect.height;
+      startL = rect.left - parentRect.left;
+      startT = rect.top - parentRect.top;
     });
   });
 }
@@ -43,32 +40,35 @@ window.addEventListener("mousemove", (e) => {
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
 
-  let newWidth = startWidth;
-  let newHeight = startHeight;
-  let newLeft = startLeft;
-  let newTop = startTop;
+  const workspace = activeEl.offsetParent;
 
-  if (activeHandle.includes("r")) {
-    newWidth = startWidth + dx;
-  }
+  let w = startW;
+  let h = startH;
+  let l = startL;
+  let t = startT;
+
+  if (activeHandle.includes("r")) w = startW + dx;
   if (activeHandle.includes("l")) {
-    newWidth = startWidth - dx;
-    newLeft = startLeft + dx;
+    w = startW - dx;
+    l = startL + dx;
   }
-  if (activeHandle.includes("b")) {
-    newHeight = startHeight + dy;
-  }
+  if (activeHandle.includes("b")) h = startH + dy;
   if (activeHandle.includes("t")) {
-    newHeight = startHeight - dy;
-    newTop = startTop + dy;
+    h = startH - dy;
+    t = startT + dy;
   }
 
-  activeEl.style.width = `${newWidth}px`;
-  activeEl.style.height = `${newHeight}px`;
-  activeEl.style.left = `${newLeft}px`;
-  activeEl.style.top = `${newTop}px`;
+  // 🔒 CLAMP
+  w = clamp(w, MIN_SIZE, workspace.clientWidth - l);
+  h = clamp(h, MIN_SIZE, workspace.clientHeight - t);
+  l = clamp(l, 0, workspace.clientWidth - w);
+  t = clamp(t, 0, workspace.clientHeight - h);
 
-  // sync selection overlay
+  activeEl.style.width = w + "px";
+  activeEl.style.height = h + "px";
+  activeEl.style.left = l + "px";
+  activeEl.style.top = t + "px";
+
   selectObject(activeEl);
 });
 

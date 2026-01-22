@@ -1,0 +1,47 @@
+.layers-panel {
+  background: #1f1f1f;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.layers-panel h4 {
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #aaa;
+}
+
+#layers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+
+#layers-list li {
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #2a2a2a;
+  margin-bottom: 4px;
+  color: #ddd;
+}
+
+#layers-list li.active {
+  background: #4b5cff;
+  color: #fff;
+}
+
+.layers-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.layers-actions button {
+  flex: 1;
+  background: #2a2a2a;
+  border: none;
+  color: #ddd;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}

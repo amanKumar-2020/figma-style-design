@@ -1,3 +1,4 @@
 export const state = {
-  activeTool: "select",
+  objects: [],
+  selectedElement: null,
 };

@@ -24,6 +24,10 @@ No frameworks, no libraries.
 - `css/` → global, layout, component styles
 - `js/` → JavaScript logic
 
+### Entry point/file
+
+- index.js  ->server start from here
+
 ## Status
 
 🚧 Project setup phase ✅
