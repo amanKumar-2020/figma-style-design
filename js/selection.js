@@ -22,6 +22,15 @@ export function selectObject(el) {
 
   overlay.classList.remove("hidden");
 
+  const opacityInput = document.querySelector(
+    '.panel-section[data-prop="opacity"] input[type="range"]',
+  );
+
+  if (opacityInput && el.style.opacity !== "") {
+    opacityInput.value = Math.round((parseFloat(el.style.opacity) || 1) * 100);
+  }
+
+
   showPanel();
   syncPanel();
   renderLayers();

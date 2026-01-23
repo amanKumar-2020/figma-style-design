@@ -8,6 +8,7 @@ import { selectObject } from "./selection.js";
 export function initPropertiesPanel() {
   initColorSwatches();
   bindColorSwatches();
+  bindOpacity();
 }
 
 /* ===============================
@@ -15,7 +16,6 @@ export function initPropertiesPanel() {
 ================================ */
 
 function initColorSwatches() {
-  // ensure UI colors are visible (CSS uses --color)
   document.querySelectorAll(".color").forEach((el) => {
     const color = el.dataset.color;
     if (color) {
@@ -25,7 +25,7 @@ function initColorSwatches() {
 }
 
 /* ===============================
-   EVENT BINDINGS
+   COLOR BINDINGS
 ================================ */
 
 function bindColorSwatches() {
@@ -46,6 +46,36 @@ function bindColorSwatches() {
 }
 
 /* ===============================
+   OPACITY BINDING
+================================ */
+
+function bindOpacity() {
+  const opacityInput = document.querySelector(
+    '.panel-section[data-prop="opacity"] input[type="range"]',
+  );
+
+  if (!opacityInput) return;
+
+  // set initial UI value from state
+  opacityInput.value = Math.round(state.style.opacity * 100);
+
+  opacityInput.addEventListener("input", () => {
+    const value = Number(opacityInput.value) / 100;
+
+    // save default opacity
+    state.style.opacity = value;
+
+    const el = state.selectedElement;
+    if (!el) return;
+
+    el.style.opacity = value;
+
+    // keep overlay in sync
+    selectObject(el, true);
+  });
+}
+
+/* ===============================
    UI HELPERS
 ================================ */
 
@@ -61,7 +91,6 @@ function setActiveSwatch(section, activeEl) {
 ================================ */
 
 function applyProperty(prop, value) {
-  // store as default style for new objects
   state.style[prop] = value;
 
   const el = state.selectedElement;
@@ -69,19 +98,13 @@ function applyProperty(prop, value) {
 
   switch (prop) {
     case "stroke":
-      // always apply full border (not just color)
       el.style.border = `2px solid ${value}`;
       break;
 
     case "fill":
       el.style.background = value;
       break;
-
-    default:
-      // future props: stroke-width, opacity, dash, etc.
-      break;
   }
 
-  // re-sync selection overlay safely
   selectObject(el, true);
 }

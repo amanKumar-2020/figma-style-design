@@ -14,5 +14,6 @@ export const state = {
   style: {
     stroke: "#2ecc71", // green
     fill: "transparent",
+    opacity: 1,
   },
 };

@@ -20,6 +20,8 @@ export function createObject(type = "rect") {
 
   el.style.border = `2px solid ${state.style.stroke}`;
   el.style.background = state.style.fill;
+  el.style.opacity = state.style.opacity;
+
 
   el.addEventListener("click", (e) => {
     e.stopPropagation();
