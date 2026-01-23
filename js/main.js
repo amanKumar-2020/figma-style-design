@@ -11,6 +11,7 @@ import { enableResize } from "./resize.js";
 import { initCircleDraw } from "./circleDraw.js";
 import { initLineDraw } from "./lineDraw.js";
 import { initArrowDraw } from "./arrowDraw.js";
+import { initEraser } from "./eraser.js";
 
 enableRotate();
 enableResize();
@@ -76,3 +77,5 @@ initRectangleDraw(workspace);
 initCircleDraw(workspace);
 initLineDraw(workspace);
 initArrowDraw(workspace);
+
+initEraser(workspace);

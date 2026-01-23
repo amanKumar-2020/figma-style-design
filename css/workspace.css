@@ -130,3 +130,7 @@
   border-bottom: 4px solid transparent;
   transform: translateY(-50%);
 }
+
+#workspace.eraser {
+  cursor: not-allowed;
+}

@@ -31,3 +31,5 @@ function updateToolbarActiveState() {
     btn.classList.toggle("active", btn.dataset.tool === state.activeTool);
   });
 }
+const workspace = document.getElementById("workspace");
+workspace.classList.toggle("eraser", state.activeTool === "eraser");
