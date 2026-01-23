@@ -48,6 +48,7 @@ function eraseAtPoint(x, y) {
       }
 
       renderLayers();
+
       break; // erase ONE per frame (important)
     }
   }

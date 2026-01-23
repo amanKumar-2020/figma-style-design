@@ -36,6 +36,7 @@ export function createObject(type = "rect") {
   enableDrag(el);
 
   state.objects.push(el);
+  renderLayers();
   document.getElementById("workspace").appendChild(el);
 
   return el;

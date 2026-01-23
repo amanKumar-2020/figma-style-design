@@ -85,3 +85,9 @@ initEraser(workspace);
 load("sidebar-left", "components/sidebar-left.html", () => {
   initPropertiesPanel();
 });
+
+
+document.addEventListener("click", (e) => {
+  if (e.target.id === "layer-up") moveLayer("up");
+  if (e.target.id === "layer-down") moveLayer("down");
+});

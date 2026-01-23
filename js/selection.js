@@ -1,15 +1,23 @@
 import { state } from "./state.js";
 import { syncPanel, showPanel, hidePanel } from "./panel.js";
 import { renderLayers } from "./layers.js";
+import { syncPropertiesPanel } from "./propertiesSync.js";
 
-export function selectObject(el) {
-  if (state.activeTool !== "select") return;
+/* ===============================
+   SELECT
+================================ */
+
+export function selectObject(el, force = false) {
+  // tool guard (allow system-forced selection)
+  if (!force && state.activeTool !== "select") return;
   if (!el || !el.isConnected) return;
 
   const overlay = document.getElementById("selection-overlay");
   if (!overlay) return;
+
   state.selectedElement = el;
 
+  /* ---------- position overlay ---------- */
   const rect = el.getBoundingClientRect();
   const parentRect = el.offsetParent.getBoundingClientRect();
 
@@ -17,58 +25,29 @@ export function selectObject(el) {
   overlay.style.top = rect.top - parentRect.top + "px";
   overlay.style.width = rect.width + "px";
   overlay.style.height = rect.height + "px";
-
-  overlay.style.transform = el.style.transform;
+  overlay.style.transform = el.style.transform || "";
 
   overlay.classList.remove("hidden");
 
-  const opacityInput = document.querySelector(
-    '.panel-section[data-prop="opacity"] input[type="range"]',
-  );
+  /* ---------- sync UI ---------- */
+  syncPropertiesPanel(el); // 🔥 ONE unified call
 
-  if (opacityInput && el.style.opacity !== "") {
-    opacityInput.value = Math.round((parseFloat(el.style.opacity) || 1) * 100);
-  }
-
-  // sync stroke width UI
-  const strokeSection = document.querySelector(
-    '.panel-section[data-prop="stroke-width"]',
-  );
-
-  // sync stroke style UI
-  const styleSection = document.querySelector(
-    '.panel-section[data-prop="stroke-style"]',
-  );
-
-  if (styleSection) {
-    const currentStyle =
-      state.selectedElement.style.borderStyle ||
-      state.style.strokeStyle ||
-      "solid";
-
-    styleSection.querySelectorAll(".icon-btn").forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.value === currentStyle);
-    });
-  }
-
-  if (strokeSection) {
-    const width =
-      parseInt(state.selectedElement.style.borderWidth) ||
-      state.style.strokeWidth;
-
-    strokeSection.querySelectorAll(".icon-btn").forEach((btn) => {
-      btn.classList.toggle("active", Number(btn.dataset.value) === width);
-    });
-  }
-
+  /* ---------- panels ---------- */
   showPanel();
   syncPanel();
   renderLayers();
 }
 
+/* ===============================
+   CLEAR
+================================ */
+
 export function clearSelection() {
   state.selectedElement = null;
-  document.getElementById("selection-overlay").classList.add("hidden");
+
+  const overlay = document.getElementById("selection-overlay");
+  if (overlay) overlay.classList.add("hidden");
+
   hidePanel();
   renderLayers();
 }
