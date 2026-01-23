@@ -9,6 +9,8 @@ import { initRectangleDraw } from "./rectangleDraw.js";
 import { state } from "./state.js";
 import { enableResize } from "./resize.js";
 import { initCircleDraw } from "./circleDraw.js";
+import { initLineDraw } from "./lineDraw.js";
+import { initArrowDraw } from "./arrowDraw.js";
 
 enableRotate();
 enableResize();
@@ -67,3 +69,10 @@ document.addEventListener("click", (e) => {
 // Circle draw
 initRectangleDraw(workspace);
 initCircleDraw(workspace);
+
+// line and arrow 
+
+initRectangleDraw(workspace);
+initCircleDraw(workspace);
+initLineDraw(workspace);
+initArrowDraw(workspace);

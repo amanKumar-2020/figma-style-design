@@ -110,3 +110,23 @@
 .canvas-object.circle {
   border-radius: 50%;
 }
+
+/* line and arrow  */
+.canvas-object.line,
+.canvas-object.arrow {
+  background: #fff;
+  transform-origin: 0 50%;
+}
+
+.canvas-object.arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-left: 8px solid #fff;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transform: translateY(-50%);
+}
