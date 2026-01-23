@@ -3,6 +3,7 @@ import { enableDrag } from "./drag.js";
 import { enableResize } from "./resize.js";
 import { enableRotate } from "./rotate.js";
 import { selectObject } from "./selection.js";
+import { renderToolbar } from "./toolbar.js";
 
 let ghost = null;
 let startX = 0;
@@ -48,27 +49,31 @@ function onMouseMove(e) {
 
   ghost.style.left = x + "px";
   ghost.style.top = y + "px";
-  ghost.style.width = w + "px";
+  ghost.style.width = w + "px";  
   ghost.style.height = h + "px";
 }
 
-function onMouseUp() {
+function onMouseUp(e) {
   if (!state.isDrawing || !ghost) return;
 
   ghost.classList.remove("ghost");
 
   enableDrag(ghost);
-  enableResize(ghost);
-  enableRotate(ghost);
 
-  //  REGISTER OBJECT
   state.objects.push(ghost);
 
   ghost.addEventListener("click", (e) => {
-    e.stopPropagation(); //  CRITICAL
+    e.stopPropagation();
     selectObject(ghost);
   });
 
+  //  IMPORTANT: mark drawing finished BEFORE selecting
   state.isDrawing = false;
+  state.activeTool = "select";
+  renderToolbar(); //  sync UI
+  //  AUTO-SELECT AFTER DRAW
+  selectObject(ghost ,true);
+
   ghost = null;
 }
+

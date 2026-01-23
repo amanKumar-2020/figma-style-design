@@ -28,7 +28,7 @@ function load(id, file, callback) {
     .catch((err) => console.error(err.message));
 }
 
-/* ---------- toolbar ---------- */
+//  ---------- toolbar ---------- 
 fetch("components/toolbar.html")
   .then((res) => res.text())
   .then((html) => {
@@ -41,10 +41,15 @@ const workspace = document.getElementById("workspace");
 initRectangleDraw(workspace);
 
 workspace.addEventListener("click", (e) => {
+  //  DO NOT clear selection right after drawing
+  if (state.isDrawing) return;
+
   if (state.isRotating || state.isResizing) return;
-  if (e.target !== workspace) return; // 🔥 only empty canvas
+  if (e.target !== workspace) return;
+
   clearSelection();
 });
+
 
 /* after sidebar loads */
 load("sidebar-left", "components/sidebar-left.html");
