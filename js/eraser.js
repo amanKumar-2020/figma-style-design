@@ -3,30 +3,52 @@ import { clearSelection } from "./selection.js";
 import { renderLayers } from "./layers.js";
 
 export function initEraser(workspace) {
-  workspace.addEventListener("click", onEraserClick, true); // capture
+  workspace.addEventListener("mousedown", onMouseDown);
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
 }
 
-function onEraserClick(e) {
+function onMouseDown(e) {
   if (state.activeTool !== "eraser") return;
+  if (e.button !== 0) return;
 
-  const target = e.target;
+  state.isErasing = true;
 
-  // 🔥 stop everything else
+  // prevent selection / drag
   e.preventDefault();
   e.stopPropagation();
 
-  // erase only real objects
-  if (
-    target.classList?.contains("canvas-object") ||
-    target instanceof SVGElement
-  ) {
-    target.remove();
-    state.objects = state.objects.filter((o) => o !== target);
+  eraseAtPoint(e.clientX, e.clientY);
+}
 
-    if (state.selectedElement === target) {
-      clearSelection();
+function onMouseMove(e) {
+  if (!state.isErasing) return;
+
+  eraseAtPoint(e.clientX, e.clientY);
+}
+
+function onMouseUp() {
+  if (!state.isErasing) return;
+
+  state.isErasing = false;
+}
+
+function eraseAtPoint(x, y) {
+  const elements = document.elementsFromPoint(x, y);
+
+  for (const el of elements) {
+    if (el.classList?.contains("canvas-object") || el instanceof SVGElement) {
+      // remove element
+      el.remove();
+
+      state.objects = state.objects.filter((o) => o !== el);
+
+      if (state.selectedElement === el) {
+        clearSelection();
+      }
+
+      renderLayers();
+      break; // erase ONE per frame (important)
     }
-
-    renderLayers();
   }
 }

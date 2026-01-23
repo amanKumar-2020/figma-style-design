@@ -4,6 +4,7 @@ export const state = {
   selectedElement: null,
   isDrawing: false,
   isResizing: false,
+  isErasing: false,
   isRotating: false,
   objects: [],
 };
