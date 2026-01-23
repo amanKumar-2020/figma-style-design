@@ -106,3 +106,7 @@
   border: 2px dashed #4b5cff;
   pointer-events: none;
 }
+
+.canvas-object.circle {
+  border-radius: 50%;
+}

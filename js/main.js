@@ -8,6 +8,7 @@ import { renderLayers, moveLayer } from "./layers.js";
 import { initRectangleDraw } from "./rectangleDraw.js";
 import { state } from "./state.js";
 import { enableResize } from "./resize.js";
+import { initCircleDraw } from "./circleDraw.js";
 
 enableRotate();
 enableResize();
@@ -62,3 +63,7 @@ document.addEventListener("click", (e) => {
   if (e.target.id === "layer-up") moveLayer("up");
   if (e.target.id === "layer-down") moveLayer("down");
 });
+
+// Circle draw
+initRectangleDraw(workspace);
+initCircleDraw(workspace);
