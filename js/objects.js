@@ -18,12 +18,15 @@ export function createObject(type = "rect") {
   el.style.height = "100px";
   el.style.zIndex = state.objects.length + 1;
 
+  el.style.border = `2px solid ${state.style.stroke}`;
+  el.style.background = state.style.fill;
+
   el.addEventListener("click", (e) => {
     e.stopPropagation();
     selectObject(el);
   });
 
-  enableDrag(el); // ✅ object-based
+  enableDrag(el);
 
   state.objects.push(el);
   document.getElementById("workspace").appendChild(el);

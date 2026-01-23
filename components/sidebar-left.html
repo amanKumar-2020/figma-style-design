@@ -1,89 +1,98 @@
 <div class="left-panel">
 
-  <!-- Tool Options -->
-  <section class="panel-section">
+  <!-- Stroke Color -->
+  <section class="panel-section" data-prop="stroke">
     <h4>Stroke</h4>
     <div class="color-row">
-      <span class="color red"></span>
-      <span class="color green active"></span>
-      <span class="color blue"></span>
-      <span class="color yellow"></span>
-      <span class="color darkgreen"></span>
+      <span class="color active" data-color="#2ecc71"></span>
+      <span class="color" data-color="#e74c3c"></span>
+      <span class="color" data-color="#3498db"></span>
+      <span class="color" data-color="#f1c40f"></span>
+      <span class="color" data-color="#145a32"></span>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Fill / Background -->
+  <section class="panel-section" data-prop="fill">
     <h4>Background</h4>
     <div class="color-row">
-      <span class="color transparent"></span>
-      <span class="color red"></span>
-      <span class="color green"></span>
-      <span class="color gray"></span>
-      <span class="color yellow"></span>
+      <span class="color" data-color="transparent"></span>
+      <span class="color" data-color="#e74c3c"></span>
+      <span class="color" data-color="#2ecc71"></span>
+      <span class="color" data-color="#95a5a6"></span>
+      <span class="color" data-color="#f1c40f"></span>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Fill Style (future) -->
+  <section class="panel-section" data-prop="fill-style">
     <h4>Fill</h4>
     <div class="icon-row">
-      <button class="icon-btn">▧</button>
-      <button class="icon-btn">▒</button>
-      <button class="icon-btn active">■</button>
+      <button class="icon-btn" data-value="hachure">▧</button>
+      <button class="icon-btn" data-value="cross">▒</button>
+      <button class="icon-btn active" data-value="solid">■</button>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Stroke Width -->
+  <section class="panel-section" data-prop="stroke-width">
     <h4>Stroke width</h4>
     <div class="icon-row">
-      <button class="icon-btn">–</button>
-      <button class="icon-btn active">—</button>
-      <button class="icon-btn">━━</button>
+      <button class="icon-btn" data-value="1">–</button>
+      <button class="icon-btn active" data-value="2">—</button>
+      <button class="icon-btn" data-value="4">━━</button>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Stroke Style -->
+  <section class="panel-section" data-prop="stroke-style">
     <h4>Stroke style</h4>
     <div class="icon-row">
-      <button class="icon-btn active">—</button>
-      <button class="icon-btn">···</button>
-      <button class="icon-btn">----</button>
+      <button class="icon-btn active" data-value="solid">—</button>
+      <button class="icon-btn" data-value="dotted">···</button>
+      <button class="icon-btn" data-value="dashed">----</button>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Sloppiness (future roughness) -->
+  <section class="panel-section" data-prop="roughness">
     <h4>Sloppiness</h4>
     <div class="icon-row">
-      <button class="icon-btn">∿</button>
-      <button class="icon-btn active">≈</button>
-      <button class="icon-btn">〰</button>
+      <button class="icon-btn" data-value="1">∿</button>
+      <button class="icon-btn active" data-value="2">≈</button>
+      <button class="icon-btn" data-value="3">〰</button>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Edges -->
+  <section class="panel-section" data-prop="edges">
     <h4>Edges</h4>
     <div class="icon-row">
-      <button class="icon-btn">⬚</button>
-      <button class="icon-btn active">⬒</button>
+      <button class="icon-btn" data-value="sharp">⬚</button>
+      <button class="icon-btn active" data-value="round">⬒</button>
     </div>
   </section>
 
-  <section class="panel-section">
+  <!-- Opacity -->
+  <section class="panel-section" data-prop="opacity">
     <h4>Opacity</h4>
-    <input type="range" min="0" max="100" value="100" />
+    <input type="range" min="0" max="100" value="100" data-prop="opacity" />
     <div class="opacity-labels">
       <span>0</span>
       <span>100</span>
     </div>
   </section>
 
+  <!-- Layers -->
   <div id="layers-container"></div>
 
+  <!-- Actions -->
   <section class="panel-section">
     <h4>Actions</h4>
     <div class="icon-row">
-      <button class="icon-btn">⧉</button>
-      <button class="icon-btn">🗑</button>
-      <button class="icon-btn">🔗</button>
+      <button class="icon-btn" data-action="duplicate">⧉</button>
+      <button class="icon-btn" data-action="delete">🗑</button>
+      <button class="icon-btn" data-action="link">🔗</button>
     </div>
   </section>
 

@@ -12,6 +12,7 @@ import { initCircleDraw } from "./circleDraw.js";
 import { initLineDraw } from "./lineDraw.js";
 import { initArrowDraw } from "./arrowDraw.js";
 import { initEraser } from "./eraser.js";
+import { initPropertiesPanel } from "./properties.js";
 
 enableRotate();
 enableResize();
@@ -79,3 +80,8 @@ initLineDraw(workspace);
 initArrowDraw(workspace);
 
 initEraser(workspace);
+
+
+load("sidebar-left", "components/sidebar-left.html", () => {
+  initPropertiesPanel();
+});

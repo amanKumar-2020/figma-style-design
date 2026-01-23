@@ -1,10 +1,18 @@
-
 export const state = {
   activeTool: "select",
+
   selectedElement: null,
+  objects: [],
+
+  // interaction flags
   isDrawing: false,
   isResizing: false,
-  isErasing: false,
   isRotating: false,
-  objects: [],
+  isErasing: false,
+
+  // 🎨 DEFAULT STYLES
+  style: {
+    stroke: "#2ecc71", // green
+    fill: "transparent",
+  },
 };

@@ -9,5 +9,4 @@ export const tools = [
   // { id: "pencil", icon: "✏", label: "Pencil" },
   { id: "eraser", icon: "🧽", label: "Eraser" },
   { id: "text", icon: "A", label: "Text" },
-  { id: "image", icon: "🖼", label: "Image" },
 ];
