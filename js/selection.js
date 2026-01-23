@@ -35,6 +35,22 @@ export function selectObject(el) {
     '.panel-section[data-prop="stroke-width"]',
   );
 
+  // sync stroke style UI
+  const styleSection = document.querySelector(
+    '.panel-section[data-prop="stroke-style"]',
+  );
+
+  if (styleSection) {
+    const currentStyle =
+      state.selectedElement.style.borderStyle ||
+      state.style.strokeStyle ||
+      "solid";
+
+    styleSection.querySelectorAll(".icon-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.value === currentStyle);
+    });
+  }
+
   if (strokeSection) {
     const width =
       parseInt(state.selectedElement.style.borderWidth) ||

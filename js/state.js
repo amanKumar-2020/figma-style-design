@@ -16,5 +16,6 @@ export const state = {
     fill: "transparent",
     opacity: 1,
     strokeWidth: 2,
+    strokeStyle: "solid",
   },
 };

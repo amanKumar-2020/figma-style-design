@@ -10,6 +10,7 @@ export function initPropertiesPanel() {
   bindColorSwatches();
   bindOpacity();
   bindStrokeWidth();
+  bindStrokeStyle();
 }
 
 /* ===============================
@@ -146,6 +147,55 @@ function applyStrokeWidth(width) {
 
   // apply safely
   el.style.borderWidth = `${width}px`;
+
+  // keep overlay in sync
+  selectObject(el, true);
+}
+
+function bindStrokeStyle() {
+  const section = document.querySelector(
+    '.panel-section[data-prop="stroke-style"]',
+  );
+
+  if (!section) return;
+
+  section.addEventListener("click", (e) => {
+    const btn = e.target.closest(".icon-btn");
+    if (!btn) return;
+
+    const value = btn.dataset.value;
+    if (!value) return;
+
+    // UI active state
+    section
+      .querySelectorAll(".icon-btn")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    applyStrokeStyle(value);
+  });
+}
+
+function applyStrokeStyle(style) {
+  // save default
+  state.style.strokeStyle = style;
+
+  const el = state.selectedElement;
+  if (!el) return;
+
+  switch (style) {
+    case "dotted":
+      el.style.borderStyle = "dotted";
+      break;
+
+    case "dashed":
+      el.style.borderStyle = "dashed";
+      break;
+
+    default:
+      el.style.borderStyle = "solid";
+      break;
+  }
 
   // keep overlay in sync
   selectObject(el, true);

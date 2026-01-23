@@ -25,6 +25,8 @@ export function createObject(type = "rect") {
   el.style.border = `${state.style.strokeWidth}px solid ${state.style.stroke}`;
   el.style.opacity = state.style.opacity;
 
+  applyStrokeStyle(el, state.style.strokeStyle);
+
 
   el.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -37,4 +39,20 @@ export function createObject(type = "rect") {
   document.getElementById("workspace").appendChild(el);
 
   return el;
+}
+
+function applyStrokeStyle(el, style) {
+  switch (style) {
+    case "dotted":
+      el.style.borderStyle = "dotted";
+      break;
+
+    case "dashed":
+      el.style.borderStyle = "dashed";
+      break;
+
+    default:
+      el.style.borderStyle = "solid";
+      break;
+  }
 }
