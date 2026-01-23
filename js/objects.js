@@ -22,6 +22,9 @@ export function createObject(type = "rect") {
   el.style.background = state.style.fill;
   el.style.opacity = state.style.opacity;
 
+  el.style.border = `${state.style.strokeWidth}px solid ${state.style.stroke}`;
+  el.style.opacity = state.style.opacity;
+
 
   el.addEventListener("click", (e) => {
     e.stopPropagation();

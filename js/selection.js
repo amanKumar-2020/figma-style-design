@@ -4,10 +4,10 @@ import { renderLayers } from "./layers.js";
 
 export function selectObject(el) {
   if (state.activeTool !== "select") return;
-   if (!el || !el.isConnected) return;
+  if (!el || !el.isConnected) return;
 
-   const overlay = document.getElementById("selection-overlay");
-   if (!overlay) return;
+  const overlay = document.getElementById("selection-overlay");
+  if (!overlay) return;
   state.selectedElement = el;
 
   const rect = el.getBoundingClientRect();
@@ -30,6 +30,20 @@ export function selectObject(el) {
     opacityInput.value = Math.round((parseFloat(el.style.opacity) || 1) * 100);
   }
 
+  // sync stroke width UI
+  const strokeSection = document.querySelector(
+    '.panel-section[data-prop="stroke-width"]',
+  );
+
+  if (strokeSection) {
+    const width =
+      parseInt(state.selectedElement.style.borderWidth) ||
+      state.style.strokeWidth;
+
+    strokeSection.querySelectorAll(".icon-btn").forEach((btn) => {
+      btn.classList.toggle("active", Number(btn.dataset.value) === width);
+    });
+  }
 
   showPanel();
   syncPanel();

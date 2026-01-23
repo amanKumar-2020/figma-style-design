@@ -15,5 +15,6 @@ export const state = {
     stroke: "#2ecc71", // green
     fill: "transparent",
     opacity: 1,
+    strokeWidth: 2,
   },
 };

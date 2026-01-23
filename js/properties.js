@@ -9,6 +9,7 @@ export function initPropertiesPanel() {
   initColorSwatches();
   bindColorSwatches();
   bindOpacity();
+  bindStrokeWidth();
 }
 
 /* ===============================
@@ -106,5 +107,46 @@ function applyProperty(prop, value) {
       break;
   }
 
+  selectObject(el, true);
+}
+
+/* ===============================
+   STOCK
+================================ */
+function bindStrokeWidth() {
+  const section = document.querySelector(
+    '.panel-section[data-prop="stroke-width"]',
+  );
+
+  if (!section) return;
+
+  section.addEventListener("click", (e) => {
+    const btn = e.target.closest(".icon-btn");
+    if (!btn) return;
+
+    const value = Number(btn.dataset.value);
+    if (!value) return;
+
+    // UI active state
+    section
+      .querySelectorAll(".icon-btn")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    applyStrokeWidth(value);
+  });
+}
+
+function applyStrokeWidth(width) {
+  // store default
+  state.style.strokeWidth = width;
+
+  const el = state.selectedElement;
+  if (!el) return;
+
+  // apply safely
+  el.style.borderWidth = `${width}px`;
+
+  // keep overlay in sync
   selectObject(el, true);
 }
