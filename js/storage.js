@@ -55,6 +55,9 @@ export function saveProject() {
 /**
  * Loads data from localStorage and rebuilds the DOM
  */
+/**
+ * Loads data from localStorage and rebuilds the DOM elements.
+ */
 export function loadProject() {
   const json = localStorage.getItem(STORAGE_KEY);
   if (!json) return;
@@ -62,22 +65,19 @@ export function loadProject() {
   const data = JSON.parse(json);
   const workspace = document.getElementById(WORKSPACE_ID);
 
-  // 1. Clear existing objects from DOM and State
-  // We filter to remove only canvas-objects, avoiding the selection-overlay
-  const existingObjects = workspace.querySelectorAll(
-    ".canvas-object:not(.ghost)",
-  );
+  // 1. Cleanup: Remove existing canvas objects
+  const existingObjects = workspace.querySelectorAll(".canvas-object:not(.ghost)");
   existingObjects.forEach((el) => el.remove());
-  state.objects = [];
+  state.objects = []; 
 
-  // 2. Rebuild Objects
+  // 2. Reconstruct objects
   data.objects.forEach((objData) => {
     const el = document.createElement("div");
-
-    // Classes
+    
+    // Basic Classes
     el.className = "canvas-object";
-    if (objData.type !== "rect") {
-      el.classList.add(objData.type);
+    if (objData.type && objData.type !== "rect") {
+        el.classList.add(objData.type);
     }
 
     // ID
@@ -98,32 +98,47 @@ export function loadProject() {
 
     // Styles
     if (objData.styles) {
-      el.style.backgroundColor = objData.styles.fill;
-      el.style.borderColor = objData.styles.stroke;
-      el.style.borderWidth = objData.styles.strokeWidth + "px";
-      el.style.borderStyle = objData.styles.strokeStyle;
+      el.style.backgroundColor = objData.styles.fill || "transparent";
+      el.style.borderColor = objData.styles.stroke || "transparent";
+      el.style.borderWidth = (objData.styles.strokeWidth || 0) + "px";
+      el.style.borderStyle = objData.styles.strokeStyle || "solid";
       el.style.opacity = objData.styles.opacity;
     }
 
-    // Specific Fixes
-    if (objData.type === "circle") {
-      el.style.borderRadius = "50%";
-    }
-    // Lines/Arrows often have 0 height or specific transform origins in some implementations,
-    // but your draw code handles them via width/rotation, so the standard restore above works.
+    // 1. Check if background is transparent
+    const isBgTransparent = !el.style.backgroundColor || 
+                            el.style.backgroundColor === "transparent" || 
+                            el.style.backgroundColor === "rgba(0, 0, 0, 0)";
 
-    // 3. Re-attach Events (Critical!)
+    // 2. Check if border is invisible (width 0 or transparent)
+    const isBorderInvisible = !el.style.borderColor || 
+                              el.style.borderColor === "transparent" || 
+                              parseFloat(el.style.borderWidth) === 0;
+
+    // 3. If BOTH are invisible, force a white border
+    if (isBgTransparent && isBorderInvisible) {
+        el.style.border = "2px solid #ffffff";
+    }
+    // ---------------------------------
+
+    // Specific Fixes for shapes
+    if (objData.type === 'circle') {
+        el.style.borderRadius = "50%";
+    }
+
+    // 3. Re-attach Interactivity
     enableDrag(el);
     el.addEventListener("click", (e) => {
       e.stopPropagation();
       selectObject(el);
     });
 
-    // 4. Add to DOM
+    // 4. Add to DOM and State
     workspace.appendChild(el);
     state.objects.push(el);
   });
 
+  // Update Layers
   renderLayers();
-  console.log("📂 Project Loaded");
+  console.log("📂 Project Loaded with visibility fix");
 }
