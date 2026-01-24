@@ -1,6 +1,6 @@
 
 export const tools = [
-  { id: "select", icon: "🖱", label: "Select" },
+  { id: "select", icon: "↖", label: "Select" },
   { id: "rect", icon: "▭", label: "Rectangle" },
   { id: "diamond", icon: "◆", label: "Diamond" },
   { id: "circle", icon: "◯", label: "Circle" },
