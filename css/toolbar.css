@@ -1,76 +1,91 @@
-
- /* TOOLBAR */
-
+/* ===============================
+   GLASSMORPHISM TOOLBAR
+================================ */
 
 .toolbar {
   height: 64px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  justify-content: center; /* Keeps the tools centered */
   padding: 0 24px;
   
-  /*  Translucent Blue Background */
+  /* 🔵 Translucent Blue Background */
   background: rgba(20, 25, 40, 0.6); 
-  
-  /*  Frosted Glass Effect */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  
-  /* Subtle Blue Border */
   border-bottom: 1px solid rgba(75, 92, 255, 0.1);
-  
-  /* Deep Shadow */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
   
-  /* Animation */
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   z-index: 1000;
-  position: relative;
+  position: relative; /* Essential for absolute positioning of logo */
 }
 
-/* Toolbar Hover Effect (Glows brighter) */
+/* Hover Effect */
 .toolbar:hover {
   background: rgba(20, 30, 50, 0.85);
   border-bottom-color: rgba(75, 92, 255, 0.4);
-  box-shadow: 0 10px 40px rgba(41, 98, 255, 0.15); /* Blue ambient glow */
+  box-shadow: 0 10px 40px rgba(41, 98, 255, 0.15);
 }
 
+/* ===============================
+   LOGO
+================================ */
 
-   /* TOOL BUTTONS */
+.app-logo {
+  position: absolute; /* Stick to the left */
+  left: 24px;
+  
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: -0.5px;
+  user-select: none;
+  pointer-events: none; /* Let clicks pass through if needed */
+  
+  /* Cool Text Shadow */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
 
+/* ===============================
+   TOOLS WRAPPER
+================================ */
+
+.tools-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Gap between buttons moved here */
+}
+
+/* ===============================
+   TOOL BUTTONS
+================================ */
 
 .tool-btn {
   width: 42px;
   height: 42px;
   border-radius: 10px;
   border: none;
-  
-  /* Transparent initially */
   background: transparent;
-  color: #818cf8; /* Muted blue icon */
-  
+  color: #818cf8;
   font-size: 20px;
   cursor: pointer;
   display: grid;
   place-items: center;
-  
-  /* Smooth Pop Animation */
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Hover State */
 .tool-btn:hover {
   background: rgba(75, 92, 255, 0.2);
   color: #fff;
-  transform: translateY(-3px); /* Floats up */
+  transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Active / Selected State */
 .tool-btn.active {
   background: #4b5cff;
   color: #fff;
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(75, 92, 255, 0.6); /* Neon Glow */
+  box-shadow: 0 0 20px rgba(75, 92, 255, 0.6);
 }
