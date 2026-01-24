@@ -51,6 +51,9 @@ function onMouseUp() {
 
   ghost.classList.remove("ghost");
 
+  // ✅ FIX: Apply White Background for the arrow shaft
+  ghost.style.backgroundColor = "#ffffff";
+
   enableDrag(ghost);
   state.objects.push(ghost);
 

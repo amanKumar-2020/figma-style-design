@@ -18,9 +18,7 @@ export function initRectangleDraw(workspace) {
 function onMouseDown(e) {
   if (state.activeTool !== "rect") return;
   if (state.isResizing || state.isRotating) return;
-
   if (e.target.closest(".handle") || e.target.closest(".rotate-handle")) return;
-
   if (e.button !== 0) return;
 
   state.isDrawing = true;
@@ -39,7 +37,6 @@ function onMouseDown(e) {
 }
 
 function onMouseMove(e) {
-  console.log("active tool:", state.activeTool);
   if (!state.isDrawing || !ghost) return;
 
   const x = Math.min(startX, e.offsetX);
@@ -49,7 +46,7 @@ function onMouseMove(e) {
 
   ghost.style.left = x + "px";
   ghost.style.top = y + "px";
-  ghost.style.width = w + "px";  
+  ghost.style.width = w + "px";
   ghost.style.height = h + "px";
 }
 
@@ -57,6 +54,10 @@ function onMouseUp(e) {
   if (!state.isDrawing || !ghost) return;
 
   ghost.classList.remove("ghost");
+
+  // ✅ FIX: Apply Default Styles
+  ghost.style.border = "2px solid #ffffff";
+  ghost.style.backgroundColor = "transparent";
 
   enableDrag(ghost);
 
@@ -67,13 +68,10 @@ function onMouseUp(e) {
     selectObject(ghost);
   });
 
-  //  IMPORTANT: mark drawing finished BEFORE selecting
   state.isDrawing = false;
   state.activeTool = "select";
-  renderToolbar(); //  sync UI
-  //  AUTO-SELECT AFTER DRAW
-  selectObject(ghost ,true);
+  renderToolbar();
+  selectObject(ghost, true);
 
   ghost = null;
 }
-

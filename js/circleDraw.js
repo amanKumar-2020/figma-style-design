@@ -52,6 +52,10 @@ function onMouseUp() {
 
   ghost.classList.remove("ghost");
 
+  // ✅ FIX: Apply Default Styles
+  ghost.style.border = "2px solid #ffffff";
+  ghost.style.backgroundColor = "transparent";
+
   enableDrag(ghost);
 
   state.objects.push(ghost);
@@ -61,7 +65,6 @@ function onMouseUp() {
     selectObject(ghost);
   });
 
-  // 🔥 switch to select + auto select
   state.isDrawing = false;
   state.activeTool = "select";
   renderToolbar();

@@ -1,42 +1,96 @@
 /* ===============================
-   LEFT PANEL
+   RIGHT SIDEBAR (Glass Theme)
 ================================ */
 
-.left-panel {
-  width: 260px;
-  height: 100%;
+.right-sidebar {
+  width: 280px; 
+  height: 100vh;
+  
+  /* 🪟 Glassmorphism */
+  background: var(--bg-panel);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border-left: 1px solid var(--border-glass);
+  
   padding: 12px;
   overflow-y: auto;
-  background: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.4);
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
 }
 
 /* ===============================
-   PANEL SECTIONS
+   PANEL SECTIONS (Cards)
 ================================ */
 
 .panel-section {
-  background: #232323;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 0;
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+.panel-section:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .panel-section h4 {
-  margin: 0 0 8px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #b5b5b5;
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
 }
 
 /* ===============================
-   ROW LAYOUTS
+   INPUTS & ROWS
 ================================ */
 
-.color-row,
-.icon-row {
+.input-row, .color-row, .icon-row {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.input-row label {
+  width: 15px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Glowing Inputs */
+input[type="number"], 
+input[type="text"] {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  color: #fff;
+  padding: 6px 8px;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+input[type="number"]:focus, 
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow); /* Neon Glow */
+  background: rgba(0, 0, 0, 0.5);
 }
 
 /* ===============================
@@ -44,99 +98,111 @@
 ================================ */
 
 .color {
-  --color: transparent;
-
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%; /* Modern Circle */
   background: var(--color);
   cursor: pointer;
-
-  border: 2px solid #2b2b2b;
+  border: 2px solid rgba(255,255,255,0.1);
   box-sizing: border-box;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* active swatch */
-.panel-section .color.active {
-  border-color: #4b5cff;
+.color:hover {
+  transform: scale(1.15);
+  border-color: #fff;
 }
 
+.color.active {
+  border-color: #fff;
+  box-shadow: 0 0 12px var(--color); /* Glow matches color */
+  transform: scale(1.1);
+}
 
-/* transparent checker */
 .color[data-color="transparent"] {
-  background:
-    linear-gradient(45deg, #444 25%, transparent 25%),
-    linear-gradient(-45deg, #444 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #444 75%),
-    linear-gradient(-45deg, transparent 75%, #444 75%);
-  background-size: 6px 6px;
-  background-position: 0 0, 0 3px, 3px -3px, -3px 0;
+  border-radius: 6px; /* Keep transparent square */
 }
 
 /* ===============================
-   ICON BUTTONS
+   BUTTONS
 ================================ */
 
 .icon-btn {
-  background: #2a2a2a;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
   border-radius: 8px;
-  padding: 6px 10px;
-  color: #ddd;
+  padding: 6px 12px;
+  color: var(--text-muted);
   cursor: pointer;
-  font-size: 14px;
-
+  font-size: 13px;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .icon-btn:hover {
-  background: #333;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 .icon-btn.active {
-  outline: 2px solid #4b5cff;
-  outline-offset: -2px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.icon-btn.small {
+  width: 30px;
+  height: 30px;
+  padding: 0;
 }
 
 /* ===============================
-   RANGE INPUT
+   LAYERS & OVERRIDES
 ================================ */
-
-input[type="range"] {
-  width: 100%;
-  margin-top: 4px;
-}
-
-/* ===============================
-   OPACITY LABELS
-================================ */
-
-.opacity-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #888;
-}
 
 .layers-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 8px;
+  margin: 0;
 }
 
 .layers-list li {
-  padding: 6px 8px;
+  padding: 8px 10px;
   font-size: 12px;
-  background: #2a2a2a;
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   cursor: pointer;
-  color: #ccc;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+}
+
+.layers-list li:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(2px);
 }
 
 .layers-list li.active {
-  background: #4b5cff;
+  background: rgba(75, 92, 255, 0.15);
+  border: 1px solid var(--accent);
   color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
+
+/* Ensure properties panel sits inside correctly */
+/* #properties-panel {
+  position: static !important;
+  width: 100% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+#properties-panel.hidden {
+  display: none;
+} */

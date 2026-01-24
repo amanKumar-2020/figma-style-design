@@ -16,28 +16,20 @@ export function initDiamondDraw(workspace) {
 function onMouseDown(e) {
   if (state.activeTool !== "diamond") return;
   if (state.isResizing || state.isRotating) return;
-
-  // Prevent drawing if clicking existing handles
   if (e.target.closest(".handle") || e.target.closest(".rotate-handle")) return;
-
   if (e.button !== 0) return;
 
   state.isDrawing = true;
-
   startX = e.offsetX;
   startY = e.offsetY;
 
   ghost = document.createElement("div");
   ghost.className = "canvas-object ghost diamond";
-
-  // Initialize styles
   ghost.style.left = startX + "px";
   ghost.style.top = startY + "px";
   ghost.style.width = "0px";
   ghost.style.height = "0px";
-
-  // 🔥 KEY FEATURE: Rotate 45deg immediately
-  ghost.style.transform = "rotate(45deg)";
+  ghost.style.transform = "rotate(45deg)"; // Diamond starts rotated
   ghost.dataset.rotation = "45";
 
   workspace.appendChild(ghost);
@@ -46,14 +38,11 @@ function onMouseDown(e) {
 function onMouseMove(e) {
   if (!state.isDrawing || !ghost) return;
 
-  // Standard draw logic (calculating width/height)
   const x = Math.min(startX, e.offsetX);
   const y = Math.min(startY, e.offsetY);
   const w = Math.abs(e.offsetX - startX);
   const h = Math.abs(e.offsetY - startY);
 
-  // For a perfect diamond, we usually want a square (w == h)
-  // But we allow free sizing here.
   ghost.style.left = x + "px";
   ghost.style.top = y + "px";
   ghost.style.width = w + "px";
@@ -65,8 +54,11 @@ function onMouseUp(e) {
 
   ghost.classList.remove("ghost");
 
-  enableDrag(ghost);
+  // ✅ FIX: Apply Default Styles
+  ghost.style.border = "2px solid #ffffff";
+  ghost.style.backgroundColor = "transparent";
 
+  enableDrag(ghost);
   state.objects.push(ghost);
 
   ghost.addEventListener("click", (e) => {
@@ -77,7 +69,6 @@ function onMouseUp(e) {
   state.isDrawing = false;
   state.activeTool = "select";
   renderToolbar();
-
   selectObject(ghost, true);
 
   ghost = null;

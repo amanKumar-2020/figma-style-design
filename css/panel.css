@@ -1,68 +1,116 @@
+/* ===============================
+   FLOATING PROPERTIES PANEL
+================================ */
+
 .properties-panel {
   position: absolute;
-  top: 72px;
+  top: 72px;  /* Fits below the 64px toolbar */
   right: 16px;
-  width: 260px;                 
-  background: #1f1f1f;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-  color: #ddd;
-  z-index: 100;
+  width: 260px;
+  
+  /* 🪟 Glass Theme */
+  background: var(--bg-panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Deep shadow for floating effect */
+  
+  color: var(--text);
+  z-index: 1000;
   font-size: 12px;
+  
+  /* Smooth Fade */
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 .properties-panel.hidden {
   display: none;
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
-/* section */
+/* ===============================
+   SECTIONS
+================================ */
+
 .prop-group {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .prop-group label {
   display: block;
-  font-size: 11px;
-  color: #aaa;
-  margin-bottom: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
 }
 
-/* row */
+/* ===============================
+   INPUT ROW
+================================ */
+
 .input-row {
   display: flex;
-  gap: 4px;
+  gap: 8px;
   align-items: center;
 }
 
-/* inputs */
+/* ===============================
+   GLOWING INPUTS
+================================ */
+
 .input-row input {
   flex: 1;
-  height: 28px;                 
-  background: #2a2a2a;
-  border: none;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-  padding: 4px 6px;
-  color: #eee;
+  padding: 4px 8px;
+  color: #fff;
   font-size: 12px;
-  min-width: 0;                 
+  min-width: 0;
+  transition: all 0.2s ease;
 }
 
-/* icon buttons */
+/* Focus State: Neon Blue Glow */
+.input-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ===============================
+   ICON BUTTONS (Small)
+================================ */
+
 .icon-btn.small {
-  width: 28px;                  
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
-  background: #2a2a2a;
-  border: none;
-  color: #ddd;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  color: var(--text-muted);
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
-  flex-shrink: 0;               
+  flex-shrink: 0;
+  transition: all 0.2s;
 }
 
 .icon-btn.small:hover {
-  background: #333;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.icon-btn.small.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 8px var(--accent-glow);
 }

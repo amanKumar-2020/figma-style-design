@@ -1,72 +1,94 @@
 /* workspace */
 #workspace {
   position: relative;
-  background: #111;
+  background-color: var(--bg-dark);
+  
+  /* 🕸️ Cool Dot Grid Pattern */
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px, 10px 10px;
+  background-position: 0 0, 20px 20px;
+  
+  overflow: hidden;
 }
 
-/* demo object */
+/* demo object / canvas objects */
 .canvas-object {
   position: absolute;
-  top: 160px;
-  left: 180px;
-  width: 220px;
-  height: 140px;
-  background: #2a2a2a;
-  border-radius: 6px;
-  display: grid;
-  place-items: center;
-  color: #ccc;
-  cursor: pointer;
+  /* 🚀 Entry Pop Animation */
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  cursor: grab;
 }
 
-/* selection overlay */
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.canvas-object.dragging {
+  cursor: grabbing;
+  z-index: 999;
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* ===============================
+   SELECTION OVERLAY (Glowing)
+================================ */
+
 .selection-overlay {
   position: absolute;
-  border: 1.5px solid #4b5cff;
-  border-radius: 6px;
-  pointer-events: none; /* important */
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  pointer-events: none;
+  
+  /* 💡 Neon Glow */
+  box-shadow: 
+    0 0 0 1px rgba(75, 92, 255, 0.1), 
+    0 0 15px var(--accent-glow);
+  
+  transition: all 0.05s linear;
 }
 
 .selection-overlay.hidden {
   display: none;
 }
 
-/* resize handles */
+/* ===============================
+   HANDLES
+================================ */
+
 .handle {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   background: #fff;
-  border: 1.5px solid #4b5cff;
+  border: 2px solid var(--accent);
   border-radius: 50%;
+  pointer-events: all;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  transition: transform 0.1s;
+}
+
+.handle:hover {
+  background: var(--accent);
+  transform: scale(1.4);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 /* corners */
-.tl { top: -5px; left: -5px; }
-.tr { top: -5px; right: -5px; }
-.bl { bottom: -5px; left: -5px; }
-.br { bottom: -5px; right: -5px; }
+.tl { top: -6px; left: -6px; }
+.tr { top: -6px; right: -6px; }
+.bl { bottom: -6px; left: -6px; }
+.br { bottom: -6px; right: -6px; }
 
 /* edges */
-.tm { top: -5px; left: 50%; transform: translateX(-50%); }
-.bm { bottom: -5px; left: 50%; transform: translateX(-50%); }
-.ml { left: -5px; top: 50%; transform: translateY(-50%); }
-.mr { right: -5px; top: 50%; transform: translateY(-50%); }
-
-
-/* drag object curser*/
-.canvas-object {
-  cursor: grab;
-}
-
-.canvas-object.dragging {
-  cursor: grabbing;
-}
-
-/* resize */
-.handle {
-  pointer-events: all; /* enable resize */
-}
+.tm { top: -6px; left: 50%; transform: translateX(-50%); }
+.bm { bottom: -6px; left: 50%; transform: translateX(-50%); }
+.ml { left: -6px; top: 50%; transform: translateY(-50%); }
+.mr { right: -6px; top: 50%; transform: translateY(-50%); }
 
 /* cursors */
 .tl, .br { cursor: nwse-resize; }
@@ -74,19 +96,23 @@
 .tm, .bm { cursor: ns-resize; }
 .ml, .mr { cursor: ew-resize; }
 
-/* Rotation Handle Styles */
+/* ===============================
+   ROTATION HANDLE
+================================ */
+
 .rotate-handle {
   position: absolute;
-  top: -28px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
   width: 10px;
   height: 10px;
   background: #fff;
-  border: 2px solid #4b5cff;
+  border: 2px solid var(--accent);
   border-radius: 50%;
   cursor: grab;
   pointer-events: all;
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .rotate-handle::after {
@@ -94,16 +120,26 @@
   position: absolute;
   top: 10px;
   left: 50%;
-  width: 2px;
-  height: 12px;
-  background: #4b5cff;
+  width: 1px;
+  height: 16px;
+  background: var(--accent);
   transform: translateX(-50%);
+  opacity: 0.7;
 }
 
+.rotate-handle:hover {
+  background: var(--accent);
+  transform: translateX(-50%) scale(1.2);
+}
+
+/* ===============================
+   SHAPE SPECIFICS
+================================ */
 
 .canvas-object.ghost {
-  opacity: 0.4;
-  border: 2px dashed #4b5cff;
+  opacity: 0.5;
+  border: 1px dashed var(--accent);
+  background: rgba(75, 92, 255, 0.1);
   pointer-events: none;
 }
 
@@ -111,11 +147,11 @@
   border-radius: 50%;
 }
 
-/* line and arrow  */
 .canvas-object.line,
 .canvas-object.arrow {
   background: #fff;
   transform-origin: 0 50%;
+  box-shadow: none; /* Lines don't usually need box shadow */
 }
 
 .canvas-object.arrow::after {
@@ -125,13 +161,12 @@
   top: 50%;
   width: 0;
   height: 0;
-  border-left: 8px solid #fff;
+  border-left: 8px solid #fff; /* Could use currentColor if implemented in JS */
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   transform: translateY(-50%);
 }
 
 #workspace.eraser {
-  /* cursor: not-allowed; */
    cursor: crosshair;
 }

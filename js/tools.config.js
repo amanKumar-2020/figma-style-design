@@ -2,7 +2,7 @@
 export const tools = [
   { id: "select", icon: "↖", label: "Select" },
   { id: "rect", icon: "▭", label: "Rectangle" },
-  { id: "diamond", icon: "◆", label: "Diamond" },
+   { id: "diamond", icon: "◆", label: "Diamond" },   //  under development
   { id: "circle", icon: "◯", label: "Circle" },
   { id: "arrow", icon: "➝", label: "Arrow" },
   { id: "line", icon: "─", label: "Line" },
