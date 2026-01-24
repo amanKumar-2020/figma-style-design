@@ -15,6 +15,7 @@ import { initEraser } from "./eraser.js";
 import { initPropertiesPanel } from "./properties.js";
 import { initDiamondDraw } from "./diamondDraw.js";
 import { exportToJSON, exportToHTML } from "./export.js";
+import { initKeyboard } from "./keyboard.js";
 
 // ✅ IMPORT STORAGE
 import { saveProject, loadProject } from "./storage.js";
@@ -132,3 +133,4 @@ initArrowDraw(workspace);
 initEraser(workspace);
 initDiamondDraw(workspace);
 initExportUI();
+initKeyboard();
