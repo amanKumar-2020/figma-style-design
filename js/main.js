@@ -13,6 +13,7 @@ import { initLineDraw } from "./lineDraw.js";
 import { initArrowDraw } from "./arrowDraw.js";
 import { initEraser } from "./eraser.js";
 import { initPropertiesPanel } from "./properties.js";
+import { initDiamondDraw } from "./diamondDraw.js";
 
 // ✅ IMPORT STORAGE
 import { saveProject, loadProject } from "./storage.js";
@@ -53,12 +54,6 @@ window.addEventListener("DOMContentLoaded", () => {
   loadProject();
 });
 
-// ✅ GLOBAL AUTO-SAVE
-// We listen to mouseup/keyup on the whole window to catch:
-// 1. Drawing finishing
-// 2. Dragging finishing
-// 3. Property panel clicks
-// 4. Deletions
 window.addEventListener("mouseup", () => setTimeout(saveProject, 100));
 window.addEventListener("keyup", () => setTimeout(saveProject, 100));
 
@@ -92,3 +87,4 @@ initCircleDraw(workspace);
 initLineDraw(workspace);
 initArrowDraw(workspace);
 initEraser(workspace);
+initDiamondDraw(workspace);

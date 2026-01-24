@@ -16,6 +16,7 @@ export function saveProject() {
     if (el.classList.contains("circle")) type = "circle";
     else if (el.classList.contains("line")) type = "line";
     else if (el.classList.contains("arrow")) type = "arrow";
+    else if (el.classList.contains("diamond")) type = "diamond";
     // Note: Rectangle has no specific class in your code, so it defaults to "rect"
 
     // 2. Extract Styles
