@@ -8,18 +8,36 @@ const WORKSPACE_ID = "workspace";
 
 /**
  * HELPER: serialized state.objects into JSON-ready format.
- * We export this so the Export module can use it too!
  */
 export function getSerializedData() {
+  console.log(`🔍 Serializing ${state.objects.length} objects...`); // Debug Log
+
   const serializedObjects = state.objects.map((el) => {
-    // 1. Determine Type
+    // 1. Safe Position Extraction
+    // We try inline styles first, then fallback to computed rects to ensure we never get 0,0
+    const rect = el.getBoundingClientRect();
+    const parentRect = el.offsetParent
+      ? el.offsetParent.getBoundingClientRect()
+      : { left: 0, top: 0 };
+
+    // Calculate relative position strictly
+    const x = el.style.left
+      ? parseFloat(el.style.left)
+      : rect.left - parentRect.left;
+    const y = el.style.top
+      ? parseFloat(el.style.top)
+      : rect.top - parentRect.top;
+    const w = el.style.width ? parseFloat(el.style.width) : rect.width;
+    const h = el.style.height ? parseFloat(el.style.height) : rect.height;
+
+    // 2. Determine Type
     let type = "rect";
     if (el.classList.contains("circle")) type = "circle";
     else if (el.classList.contains("line")) type = "line";
     else if (el.classList.contains("arrow")) type = "arrow";
     else if (el.classList.contains("diamond")) type = "diamond";
 
-    // 2. Extract Styles
+    // 3. Extract Styles
     const styles = {
       stroke: el.style.borderColor || "transparent",
       strokeWidth: parseFloat(el.style.borderWidth) || 0,
@@ -28,16 +46,18 @@ export function getSerializedData() {
       opacity: el.style.opacity ? parseFloat(el.style.opacity) : 1,
     };
 
-    // 3. Extract Rotation
+    // 4. Extract Rotation
     const rotation = parseFloat(el.dataset.rotation) || 0;
 
     return {
-      id: el.dataset.id || `obj-${Date.now()}-${Math.random()}`,
+      id:
+        el.dataset.id ||
+        `obj-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type: type,
-      x: parseFloat(el.style.left) || 0,
-      y: parseFloat(el.style.top) || 0,
-      width: parseFloat(el.style.width) || 0,
-      height: parseFloat(el.style.height) || 0,
+      x: x || 0,
+      y: y || 0,
+      width: w || 0,
+      height: h || 0,
       rotation: rotation,
       zIndex: parseInt(el.style.zIndex) || 1,
       styles: styles,
@@ -48,7 +68,7 @@ export function getSerializedData() {
 }
 
 /**
- * Saves to LocalStorage (Auto-save)
+ * Saves to LocalStorage
  */
 export function saveProject() {
   const data = getSerializedData();
@@ -98,7 +118,7 @@ export function loadProject() {
       el.style.opacity = objData.styles.opacity;
     }
 
-    // Visibility Fix (from previous step)
+    // Fix Visibility
     const isBgTransparent =
       !el.style.backgroundColor ||
       el.style.backgroundColor === "transparent" ||
@@ -125,5 +145,5 @@ export function loadProject() {
   });
 
   renderLayers();
-  console.log("📂 Project Loaded");
+  console.log(`📂 Project Loaded: ${state.objects.length} objects`);
 }
