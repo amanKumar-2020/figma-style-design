@@ -1,6 +1,6 @@
-/* ===============================
-   FLOATING PROPERTIES PANEL
-================================ */
+
+   /* FLOATING PROPERTIES PANEL */
+
 
 .properties-panel {
   position: absolute;
@@ -8,7 +8,7 @@
   right: 16px;
   width: 260px;
   
-  /* 🪟 Glass Theme */
+  /*  Glass Theme */
   background: var(--bg-panel);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -32,9 +32,9 @@
   transform: translateY(-10px);
 }
 
-/* ===============================
-   SECTIONS
-================================ */
+
+   /* SECTIONS */
+
 
 .prop-group {
   margin-bottom: 12px;
@@ -50,9 +50,9 @@
   margin-bottom: 6px;
 }
 
-/* ===============================
-   INPUT ROW
-================================ */
+
+   /* INPUT ROW */
+
 
 .input-row {
   display: flex;
@@ -60,9 +60,8 @@
   align-items: center;
 }
 
-/* ===============================
-   GLOWING INPUTS
-================================ */
+
+   /* GLOWING INPUTS */
 
 .input-row input {
   flex: 1;
@@ -85,9 +84,7 @@
   box-shadow: 0 0 10px var(--accent-glow);
 }
 
-/* ===============================
-   ICON BUTTONS (Small)
-================================ */
+   /* ICON BUTTONS (Small) */
 
 .icon-btn.small {
   width: 32px;

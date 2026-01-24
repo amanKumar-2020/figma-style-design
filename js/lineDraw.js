@@ -51,7 +51,6 @@ function onMouseUp() {
 
   ghost.classList.remove("ghost");
 
-  // ✅ FIX: Apply White Background (Lines don't use border)
   ghost.style.backgroundColor = "#ffffff";
 
   enableDrag(ghost);

@@ -1,6 +1,6 @@
-/* ===============================
-   GLASSMORPHISM TOOLBAR
-================================ */
+
+ /* TOOLBAR */
+
 
 .toolbar {
   height: 64px;
@@ -10,10 +10,10 @@
   gap: 12px;
   padding: 0 24px;
   
-  /* 🔵 Translucent Blue Background */
+  /*  Translucent Blue Background */
   background: rgba(20, 25, 40, 0.6); 
   
-  /* ❄️ Frosted Glass Effect */
+  /*  Frosted Glass Effect */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   
@@ -29,16 +29,16 @@
   position: relative;
 }
 
-/* ✨ Toolbar Hover Effect (Glows brighter) */
+/* Toolbar Hover Effect (Glows brighter) */
 .toolbar:hover {
   background: rgba(20, 30, 50, 0.85);
   border-bottom-color: rgba(75, 92, 255, 0.4);
   box-shadow: 0 10px 40px rgba(41, 98, 255, 0.15); /* Blue ambient glow */
 }
 
-/* ===============================
-   TOOL BUTTONS
-================================ */
+
+   /* TOOL BUTTONS */
+
 
 .tool-btn {
   width: 42px;

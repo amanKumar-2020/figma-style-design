@@ -55,7 +55,6 @@ function onMouseUp(e) {
 
   ghost.classList.remove("ghost");
 
-  // ✅ FIX: Apply Default Styles
   ghost.style.border = "2px solid #ffffff";
   ghost.style.backgroundColor = "transparent";
 

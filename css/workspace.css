@@ -3,7 +3,7 @@
   position: relative;
   background-color: var(--bg-dark);
   
-  /* 🕸️ Cool Dot Grid Pattern */
+  /*  Cool Dot Grid Pattern */
   background-image: 
     radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
     radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -16,7 +16,7 @@
 /* demo object / canvas objects */
 .canvas-object {
   position: absolute;
-  /* 🚀 Entry Pop Animation */
+  /*  Entry Pop Animation */
   animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   cursor: grab;
@@ -44,7 +44,7 @@
   border-radius: 4px;
   pointer-events: none;
   
-  /* 💡 Neon Glow */
+  /*  Neon Glow */
   box-shadow: 
     0 0 0 1px rgba(75, 92, 255, 0.1), 
     0 0 15px var(--accent-glow);
@@ -132,9 +132,7 @@
   transform: translateX(-50%) scale(1.2);
 }
 
-/* ===============================
-   SHAPE SPECIFICS
-================================ */
+   /* SHAPE SPECIFICS */
 
 .canvas-object.ghost {
   opacity: 0.5;

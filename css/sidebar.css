@@ -1,12 +1,10 @@
-/* ===============================
-   RIGHT SIDEBAR (Glass Theme)
-================================ */
+   /* RIGHT SIDEBAR (Glass Theme) */
 
 .right-sidebar {
   width: 280px; 
   height: 100vh;
   
-  /* 🪟 Glassmorphism */
+  /*  Glassmorphism */
   background: var(--bg-panel);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
@@ -27,9 +25,7 @@
   height: 100%;
 }
 
-/* ===============================
-   PANEL SECTIONS (Cards)
-================================ */
+   /* PANEL SECTIONS (Cards) */
 
 .panel-section {
   background: rgba(255, 255, 255, 0.03);
@@ -53,9 +49,7 @@
   color: var(--text-muted);
 }
 
-/* ===============================
-   INPUTS & ROWS
-================================ */
+   /* INPUTS & ROWS */
 
 .input-row, .color-row, .icon-row {
   display: flex;
@@ -93,9 +87,7 @@ input[type="text"]:focus {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* ===============================
-   COLOR SWATCHES
-================================ */
+   /* COLOR SWATCHES */
 
 .color {
   width: 24px;
@@ -123,9 +115,7 @@ input[type="text"]:focus {
   border-radius: 6px; /* Keep transparent square */
 }
 
-/* ===============================
-   BUTTONS
-================================ */
+   /* BUTTONS */
 
 .icon-btn {
   background: rgba(255, 255, 255, 0.05);
@@ -159,9 +149,7 @@ input[type="text"]:focus {
   padding: 0;
 }
 
-/* ===============================
-   LAYERS & OVERRIDES
-================================ */
+   /* LAYERS & OVERRIDES */
 
 .layers-list {
   list-style: none;
@@ -193,16 +181,3 @@ input[type="text"]:focus {
   color: #fff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
-
-/* Ensure properties panel sits inside correctly */
-/* #properties-panel {
-  position: static !important;
-  width: 100% !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-}
-#properties-panel.hidden {
-  display: none;
-} */

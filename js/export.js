@@ -1,11 +1,8 @@
 import { getSerializedData } from "./storage.js";
 
-/**
- * Export as JSON file (No changes here, just for reference)
- */
+
 export function exportToJSON() {
   const data = getSerializedData();
-  console.log(`📤 Exporting JSON: ${data.objects.length} items`);
 
   const jsonString = JSON.stringify(data, null, 2);
   const blob = new Blob([jsonString], { type: "application/json" });
@@ -13,16 +10,11 @@ export function exportToJSON() {
   triggerDownload(blob, "design-export.json");
 }
 
-/**
- * Export as HTML file
- * FIX: Now uses 100% width/height to prevent cutting off objects
- */
+
 export function exportToHTML() {
   const data = getSerializedData();
-  console.log(`📤 Exporting HTML: ${data.objects.length} items`);
 
-  // 1. Generate CSS
-  // We used '100vw' and '100vh' to ensure the canvas covers the whole screen
+
   const styleBlock = `
     <style>
       body { margin: 0; padding: 0; background: #1e1e1e; overflow: hidden; font-family: sans-serif; }

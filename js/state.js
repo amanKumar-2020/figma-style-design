@@ -10,7 +10,6 @@ export const state = {
   isRotating: false,
   isErasing: false,
 
-  // 🎨 DEFAULT STYLES (Updated for Dark Theme)
   style: {
     stroke: "#ffffff", // Changed from green to White
     fill: "transparent",

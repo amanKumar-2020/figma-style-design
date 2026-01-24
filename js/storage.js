@@ -10,7 +10,6 @@ const WORKSPACE_ID = "workspace";
  * HELPER: serialized state.objects into JSON-ready format.
  */
 export function getSerializedData() {
-  console.log(`🔍 Serializing ${state.objects.length} objects...`); // Debug Log
 
   const serializedObjects = state.objects.map((el) => {
     // 1. Safe Position Extraction
@@ -145,5 +144,4 @@ export function loadProject() {
   });
 
   renderLayers();
-  console.log(`📂 Project Loaded: ${state.objects.length} objects`);
 }

@@ -47,7 +47,6 @@ function deleteSelectedElement(el) {
 
   // 4. Save Changes
   saveProject();
-  console.log("🗑️ Element deleted via keyboard");
 }
 
 function moveSelectedElement(el, key) {

@@ -1,19 +1,19 @@
 :root {
-  /* 🌑 Deep Space Backgrounds */
+  /*  Deep Space Backgrounds */
   --bg-dark: #0f111a;
   --bg-panel: rgba(30, 35, 50, 0.7); /* Glass */
   --bg-input: rgba(0, 0, 0, 0.3);
   
-  /* 🔵 Neon Accents */
+  /*  Neon Accents */
   --accent: #4b5cff;
   --accent-glow: rgba(75, 92, 255, 0.5);
   
-  /* ⚪ Text & UI */
+  /*  Text & UI */
   --text: #e2e8f0;
   --text-muted: #94a3b8;
   --border-glass: rgba(255, 255, 255, 0.08);
   
-  /* 🪟 Effects */
+  /*  Effects */
   --blur: 16px;
 }
 
