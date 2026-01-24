@@ -14,8 +14,12 @@ import { initArrowDraw } from "./arrowDraw.js";
 import { initEraser } from "./eraser.js";
 import { initPropertiesPanel } from "./properties.js";
 
+// ✅ IMPORT STORAGE
+import { saveProject, loadProject } from "./storage.js";
+
 enableRotate();
 enableResize();
+
 /* ---------- load helpers ---------- */
 function load(id, file, callback) {
   fetch(file)
@@ -28,12 +32,12 @@ function load(id, file, callback) {
       if (!container) throw new Error(`Element with id "${id}" not found`);
       container.innerHTML = html;
 
-      if (callback) callback(); // ✅ DOM is ready here
+      if (callback) callback();
     })
     .catch((err) => console.error(err.message));
 }
 
-//  ---------- toolbar ---------- 
+//  ---------- toolbar ----------
 fetch("components/toolbar.html")
   .then((res) => res.text())
   .then((html) => {
@@ -41,23 +45,37 @@ fetch("components/toolbar.html")
     renderToolbar();
   });
 
-/* ---------- editor demo object ---------- */
+/* ---------- workspace init ---------- */
 const workspace = document.getElementById("workspace");
-initRectangleDraw(workspace);
 
+// ✅ LOAD DATA ON START
+window.addEventListener("DOMContentLoaded", () => {
+  loadProject();
+});
+
+// ✅ GLOBAL AUTO-SAVE
+// We listen to mouseup/keyup on the whole window to catch:
+// 1. Drawing finishing
+// 2. Dragging finishing
+// 3. Property panel clicks
+// 4. Deletions
+window.addEventListener("mouseup", () => setTimeout(saveProject, 100));
+window.addEventListener("keyup", () => setTimeout(saveProject, 100));
+
+/* ---------- Interaction Logic ---------- */
 workspace.addEventListener("click", (e) => {
-  //  DO NOT clear selection right after drawing
   if (state.isDrawing) return;
-
   if (state.isRotating || state.isResizing) return;
   if (e.target !== workspace) return;
 
   clearSelection();
 });
 
-
 /* after sidebar loads */
-load("sidebar-left", "components/sidebar-left.html");
+load("sidebar-left", "components/sidebar-left.html", () => {
+  initPropertiesPanel();
+});
+
 load("sidebar-right", "components/sidebar-right.html", () => {
   initPanel();
   load("layers-container", "components/layers.html", renderLayers);
@@ -68,26 +86,9 @@ document.addEventListener("click", (e) => {
   if (e.target.id === "layer-down") moveLayer("down");
 });
 
-// Circle draw
-initRectangleDraw(workspace);
-initCircleDraw(workspace);
-
-// line and arrow 
-
+// Init Tools
 initRectangleDraw(workspace);
 initCircleDraw(workspace);
 initLineDraw(workspace);
 initArrowDraw(workspace);
-
 initEraser(workspace);
-
-
-load("sidebar-left", "components/sidebar-left.html", () => {
-  initPropertiesPanel();
-});
-
-
-document.addEventListener("click", (e) => {
-  if (e.target.id === "layer-up") moveLayer("up");
-  if (e.target.id === "layer-down") moveLayer("down");
-});
