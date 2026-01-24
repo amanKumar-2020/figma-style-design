@@ -18,19 +18,72 @@ No frameworks, no libraries.
 - CSS
 - JavaScript
 
-## Folder Structure
+❌ No frameworks
+❌ No libraries
+❌ No canvas rendering
+✅ Pure DOM-based editor
 
-- `assets/` → images, fonts
-- `css/` → global, layout, component styles
-- `js/` → JavaScript logic
 
-### Entry point/file
+### ✨ Features
 
-- index.js  ->server start from here
+🧱 Shape Tools
 
-## Status
+Rectangle
+Circle
+Line
+Arrow
+Diamond
+Interaction
+Select objects
+Drag objects
+Resize using handles
+Rotate using rotation handle
+Multi-layer support
 
-🚧 Project setup phase ✅
-🚧 project skeleton phase ✅
-🚧 project ui phase (left sidebar ✅ , right sidebar ✅ ) ✅
-🚧 Features (object drag ✅ ,Resize object ✅ ,Rotation ✅)
+🎛 Properties Panel
+
+Stroke color
+Fill / background color
+Stroke width
+Stroke style (solid / dashed / dotted)
+Opacity control
+Live property sync on selection
+
+🗂 Layers Panel
+
+Shows all elements on canvas
+Click layer → select object
+Move layer up / down
+Z-index synced with UI and state
+
+🧹 Eraser Tool
+
+Click to delete object
+Drag-eraser to remove multiple objects
+💾 Persistence
+Save project state using localStorage
+Auto-load on page refresh
+
+
+❌ No frameworks
+❌ No libraries
+❌ No canvas rendering
+✅ Pure DOM-based editor
+
+### 📁 Folder Structure
+.
+├── assets/        # Images, icons, fonts
+├── css/           # Base styles, layout, components
+├── js/            # Core editor logic
+│   ├── tools/     # Drawing tools (rect, circle, line, etc.)
+│   ├── panels/    # Properties & layers logic
+│   ├── state.js   # Central editor state
+│   └── main.js    # Application entry point
+├── index.html
+└── README.md
+
+
+### 🚀 Entry Point
+
+index.html → Application bootstrap
+js/main.js → Editor initialization & wiring
