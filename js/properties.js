@@ -139,16 +139,37 @@ function bindStrokeWidth() {
 }
 
 function applyStrokeWidth(width) {
-  // store default
+  // 1. Update Global State
   state.style.strokeWidth = width;
 
   const el = state.selectedElement;
   if (!el) return;
 
-  // apply safely
+  // 2. Apply Width
   el.style.borderWidth = `${width}px`;
 
-  // keep overlay in sync
+  // --- 🟢 NEW LOGIC: Auto-assign White if transparent ---
+  const currentColor = el.style.borderColor;
+  
+  // Check if color is missing, transparent, or rgba(0,0,0,0)
+  const isInvisible = !currentColor || 
+                      currentColor === "transparent" || 
+                      currentColor === "rgba(0, 0, 0, 0)";
+
+  if (isInvisible) {
+    // Force White Color
+    el.style.borderColor = "#ffffff";
+    state.style.stroke = "#ffffff"; // Sync global state
+
+    // Ensure style is solid (in case it was 'none')
+    if (!el.style.borderStyle || el.style.borderStyle === "none") {
+        el.style.borderStyle = "solid";
+        state.style.strokeStyle = "solid";
+    }
+  }
+
+
+  // 3. Refresh Selection & UI (This will update the color swatches too)
   selectObject(el, true);
 }
 
