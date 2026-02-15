@@ -1,5 +1,7 @@
 # Frontend Project (Vanilla JS)
 
+live link - https://animated-centaur-2a709d.netlify.app/
+
 ### Sheryians inter batch Showdown ###
 
 The objective of this project is to build a basic visual design editor
